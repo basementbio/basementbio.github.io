@@ -69,7 +69,7 @@ Write-up in Markdown…
 ## How it deploys
 
 Pushing to the default branch triggers the GitHub Actions workflow in
-`.github/workflows/pages.yml`, which builds the site with Jekyll and publishes
+`.github/workflows/jekyll.yml`, which builds the site with Jekyll and publishes
 it to GitHub Pages. In your repo: **Settings → Pages → Build and deployment →
 Source → GitHub Actions**.
 
