@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+{% if page.date or page.tools or page.status or page.link %}
+<div class="meta-callout" role="note">
+  <p class="meta-callout__label">Project details</p>
+  <table class="meta-table">
+    <tbody>
+      {% if page.date %}<tr><th scope="row">Date</th><td>{{ page.date | date: "%B %Y" }}</td></tr>{% endif %}
+      {% if page.status %}<tr><th scope="row">Status</th><td>{{ page.status }}</td></tr>{% endif %}
+      {% if page.tools %}<tr><th scope="row">Tools &amp; materials</th><td>{{ page.tools | join: ", " }}</td></tr>{% endif %}
+      {% if page.tags %}<tr><th scope="row">Tags</th><td>{% for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}</td></tr>{% endif %}
+      {% if page.link %}<tr><th scope="row">Link</th><td><a href="{{ page.link }}">{{ page.link_label | default: page.link }}</a></td></tr>{% endif %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{{ content }}
+
+{% if page.images and page.images.size > 0 %}
+<h2 id="gallery">Gallery</h2>
+<div class="gallery gallery--detail">
+  {% for img in page.images %}
+  <figure class="gallery__item">
+    <a href="{{ img.src | relative_url }}" data-lightbox>
+      <img src="{{ img.src | relative_url }}" alt="{{ img.alt | default: page.title }}" loading="lazy">
+    </a>
+    {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endfor %}
+</div>
+{% endif %}
+
+<hr>
+<p class="back-link">
+  {% if page.collection == 'experiments' %}
+  <a href="{{ '/experiments/' | relative_url }}">← Back to Experiments</a>
+  {% else %}
+  <a href="{{ '/products/' | relative_url }}">← Back to Products</a>
+  {% endif %}
+</p>
+
+<div class="lightbox" data-lightbox-modal hidden>
+  <button class="lightbox__close" data-lightbox-close aria-label="Close">✕</button>
+  <img class="lightbox__img" data-lightbox-img src="" alt="">
+</div>

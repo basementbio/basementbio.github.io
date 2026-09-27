@@ -1,0 +1,16 @@
+---
+layout: null
+---
+[
+  {% assign pages = site.pages | where_exp: "p", "p.title" %}
+  {% assign items = site.experiments | concat: site.products | concat: pages %}
+  {% for item in items %}
+    {
+      "title": {{ item.title | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
+      "category": {% if item.collection %}{{ item.category | capitalize | jsonify }}{% else %}"Page"{% endif %},
+      "tags": {{ item.tags | join: " " | jsonify }},
+      "content": {{ item.content | strip_html | normalize_whitespace | truncatewords: 60 | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

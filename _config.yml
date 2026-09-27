@@ -1,0 +1,94 @@
+# =========================================================
+# Site settings — edit these for your portfolio
+# =========================================================
+title: "Your Name"
+tagline: "Scientist · Maker · Builder"
+description: >-
+  A portfolio of science experiments and products, documented
+  in a clean GitHub-Docs style.
+author: "Your Name"
+email: "you@example.com"
+
+# --- GitHub Pages URL config ---
+# For a USER site (repo named <username>.github.io), leave baseurl empty
+# and set url to https://<username>.github.io
+# For a PROJECT site (repo named "portfolio"), set:
+#   baseurl: "/portfolio"
+#   url: "https://<username>.github.io"
+url: "https://basementbio.github.io"
+baseurl: ""
+
+# --- Social / contact links (shown in header + contact page) ---
+social:
+  github: "basementbio"
+  linkedin: ""      # e.g. "in/your-handle"
+  twitter: ""       # e.g. "your-handle" (no @)
+  scholar: ""       # Google Scholar profile URL
+  orcid: ""         # ORCID id
+
+# =========================================================
+# Build settings — normally no need to change
+# =========================================================
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  toc_levels: 2..3
+highlighter: rouge
+permalink: pretty
+
+# Jekyll collections drive the two galleries.
+collections:
+  experiments:
+    output: true
+    permalink: /experiments/:name/
+  products:
+    output: true
+    permalink: /products/:name/
+
+# Default front matter so you write less in each project file.
+defaults:
+  - scope:
+      path: ""
+      type: experiments
+    values:
+      layout: project
+      category: experiments
+  - scope:
+      path: ""
+      type: products
+    values:
+      layout: project
+      category: products
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Navigation shown in the left sidebar + header.
+# Each item can have children (rendered as a nested tree, like GitHub Docs).
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "Experiments"
+    url: "/experiments/"
+    collection: experiments
+  - title: "Products"
+    url: "/products/"
+    collection: products
+  - title: "About"
+    url: "/about/"
+  - title: "Contact"
+    url: "/contact/"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .github
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed

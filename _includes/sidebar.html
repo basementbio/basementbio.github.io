@@ -1,0 +1,39 @@
+<aside class="sidebar" data-sidebar>
+  <nav class="sidebar__nav" aria-label="Documentation">
+    <ul class="nav-tree">
+      {% for item in site.nav %}
+        {% assign is_active = false %}
+        {% if page.url == item.url %}{% assign is_active = true %}{% endif %}
+        {% if item.collection %}
+          {% assign items = site[item.collection] | sort: "date" | reverse %}
+          {% assign section_active = false %}
+          {% if page.collection == item.collection %}{% assign section_active = true %}{% endif %}
+          <li class="nav-tree__item nav-tree__item--group{% if section_active %} is-open{% endif %}">
+            <div class="nav-tree__row">
+              <a class="nav-tree__link{% if is_active %} is-current{% endif %}" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+              {% if items.size > 0 %}
+              <button class="nav-tree__toggle" aria-label="Toggle {{ item.title }}" aria-expanded="{{ section_active }}" data-tree-toggle>
+                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"></path></svg>
+              </button>
+              {% endif %}
+            </div>
+            {% if items.size > 0 %}
+            <ul class="nav-tree__children">
+              {% for entry in items %}
+                <li class="nav-tree__item">
+                  <a class="nav-tree__link{% if page.url == entry.url %} is-current{% endif %}" href="{{ entry.url | relative_url }}">{{ entry.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+        {% else %}
+          <li class="nav-tree__item">
+            <a class="nav-tree__link{% if is_active %} is-current{% endif %}" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+</aside>
+<div class="sidebar__scrim" data-sidebar-scrim></div>

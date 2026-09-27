@@ -1,0 +1,13 @@
+---
+layout: default
+title: Products
+intro: Things I've designed and built — hardware, software, and everything between.
+toc: false
+permalink: /products/
+---
+
+{% if site.products.size > 0 %}
+  {% include gallery.html items=site.products %}
+{% else %}
+  <div class="note"><p>No products yet. Add Markdown files to the <code>_products/</code> folder to populate this gallery.</p></div>
+{% endif %}

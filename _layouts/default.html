@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  {% seo title=false %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+</head>
+<body>
+  {% include header.html %}
+
+  <div class="page">
+    {% include sidebar.html %}
+
+    <main class="content" id="main">
+      {% if page.breadcrumbs != false %}{% include breadcrumbs.html %}{% endif %}
+
+      <article class="markdown-body">
+        {% if page.title %}<h1 class="article-title">{{ page.title }}</h1>{% endif %}
+        {% if page.intro %}<p class="article-intro">{{ page.intro }}</p>{% endif %}
+        {{ content }}
+      </article>
+
+      {% include footer.html %}
+    </main>
+
+    {% if page.toc != false %}{% include toc.html %}{% endif %}
+  </div>
+
+  <script>window.SITE_BASEURL = {{ site.baseurl | jsonify }};</script>
+  <script src="{{ '/assets/js/site.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+layout: default
+title: Experiments
+intro: Documented science experiments — setups, methods, results, and photos.
+toc: false
+permalink: /experiments/
+---
+
+{% if site.experiments.size > 0 %}
+  {% include gallery.html items=site.experiments %}
+{% else %}
+  <div class="note"><p>No experiments yet. Add Markdown files to the <code>_experiments/</code> folder to populate this gallery.</p></div>
+{% endif %}
